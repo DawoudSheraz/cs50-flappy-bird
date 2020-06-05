@@ -51,6 +51,9 @@ WINDOW_HEIGHT = 720
 VIRTUAL_WIDTH = 512
 VIRTUAL_HEIGHT = 288
 
+GAME_PAUSED = false
+
+
 local background = love.graphics.newImage('images/background.png')
 local backgroundScroll = 0
 
@@ -85,6 +88,8 @@ function love.load()
         ['explosion'] = love.audio.newSource('sounds/explosion.wav', 'static'),
         ['hurt'] = love.audio.newSource('sounds/hurt.wav', 'static'),
         ['score'] = love.audio.newSource('sounds/score.wav', 'static'),
+        ['pause'] = love.audio.newSource('sounds/pause.wav', 'static'),
+        ['resume'] = love.audio.newSource('sounds/resume.wav', 'static'),
 
         -- https://freesound.org/people/xsgianni/sounds/388079/
         ['music'] = love.audio.newSource('sounds/marios_way.mp3', 'static')
@@ -155,8 +160,12 @@ end
 
 function love.update(dt)
     -- scroll our background and ground, looping back to 0 after a certain amount
-    backgroundScroll = (backgroundScroll + BACKGROUND_SCROLL_SPEED * dt) % BACKGROUND_LOOPING_POINT
-    groundScroll = (groundScroll + GROUND_SCROLL_SPEED * dt) % VIRTUAL_WIDTH
+
+    -- Background scroll is paused on game pause to create a coherent experience
+    if GAME_PAUSED == false then
+        backgroundScroll = (backgroundScroll + BACKGROUND_SCROLL_SPEED * dt) % BACKGROUND_LOOPING_POINT
+        groundScroll = (groundScroll + GROUND_SCROLL_SPEED * dt) % VIRTUAL_WIDTH
+    end
 
     gStateMachine:update(dt)
 
