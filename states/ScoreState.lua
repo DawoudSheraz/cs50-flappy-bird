@@ -35,8 +35,6 @@ function ScoreState:render()
     -- simply render the score to the middle of the screen
     local trophy = nil
     local trophyType = nil
-    love.graphics.setFont(flappyFont)
-    love.graphics.printf('Oof! You lost!', 0, 64, VIRTUAL_WIDTH, 'center')
 
     love.graphics.setFont(mediumFont)
     love.graphics.printf('Score: ' .. tostring(self.score), 0, 100, VIRTUAL_WIDTH, 'center')
@@ -55,11 +53,15 @@ function ScoreState:render()
         trophyType = "You will learn, eventually"
     end
 
+    love.graphics.setFont(flappyFont)
+
     if trophy ~= nil then
-        love.graphics.setFont(flappyFont)
-        love.graphics.printf(trophyType, 0, 200, VIRTUAL_WIDTH, 'center')
-        love.graphics.draw(trophy, 3 * VIRTUAL_WIDTH/4, VIRTUAL_HEIGHT - trophy:getHeight()/3, 0, 0.1, 0.1)
-        love.graphics.setFont(mediumFont)
+        love.graphics.printf(trophyType, 0, 64, VIRTUAL_WIDTH, 'center')
+        love.graphics.draw(trophy, VIRTUAL_WIDTH/2 - trophy:getWidth() * 0.05 , VIRTUAL_HEIGHT - trophy:getHeight()/3, 0, 0.1, 0.1)
+    else
+        love.graphics.printf('Oof! You lost!', 0, 64, VIRTUAL_WIDTH, 'center')
+
     end
-    love.graphics.printf('Press Enter to Play Again!', 0, 160, VIRTUAL_WIDTH, 'center')
+    love.graphics.setFont(mediumFont)
+    love.graphics.printf('Press Enter to Play Again!', 0, 200, VIRTUAL_WIDTH, 'center')
 end

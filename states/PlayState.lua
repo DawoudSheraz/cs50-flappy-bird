@@ -143,6 +143,7 @@ function PlayState:render()
     -- If game is paused, draw the Pause icon too
     if GAME_PAUSED then
         love.graphics.draw(pauseIcon, VIRTUAL_WIDTH/2 - pauseIcon:getWidth()/2, VIRTUAL_HEIGHT/2 - pauseIcon:getHeight()/2)
+        love.graphics.printf("Press P to resume", 0, 3 * VIRTUAL_HEIGHT/4, VIRTUAL_WIDTH, 'center')
     end
 end
 
