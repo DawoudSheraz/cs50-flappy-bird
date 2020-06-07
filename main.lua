@@ -53,6 +53,10 @@ VIRTUAL_HEIGHT = 288
 
 GAME_PAUSED = false
 
+-- Global value for pipe pair spawn
+-- This is global as Pipe gap determination will involve spawn time too
+PIPES_SPAWN_TIME = 2
+
 
 local background = love.graphics.newImage('images/background.png')
 local backgroundScroll = 0
